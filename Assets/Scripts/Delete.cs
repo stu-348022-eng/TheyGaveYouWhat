@@ -19,13 +19,23 @@ public class Delete : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        GameObject.Destroy(this.gameObject);
+        DestroyEnemy();
     }
 
     private IEnumerator KillthisGO()
     {
         yield return new WaitForSeconds(1.5f);
-        GameObject.Destroy(this.gameObject);
 
+        DestroyEnemy();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        DestroyEnemy();
+    }
+
+    public void DestroyEnemy()
+    {
+        Destroy(gameObject);
     }
 }

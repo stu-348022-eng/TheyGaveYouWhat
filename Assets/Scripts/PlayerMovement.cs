@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D body;
     private bool grounded;
     public bool FacingLeft;
-    
+    public bool CanJump;
 
     private void Awake()
     {
@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
+        
         body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
 
         if(horizontalInput > 0.01f)
@@ -33,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-        if (Input.GetKey(KeyCode.Space) && grounded)
+        if (Input.GetKey(KeyCode.Space) && grounded && CanJump)
         {
             if(grounded == true)
             {
@@ -41,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
             }
             
         }
+
 
 
     }
@@ -51,15 +53,33 @@ public class PlayerMovement : MonoBehaviour
         grounded = false;
     }
 
+    private void Climbing()
+    {
+        body.velocity = new Vector2(body.velocity.x, 4f);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "ground")
         {
             grounded = true;
+            CanJump = true;
         }
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.tag == "Climable")
+        {
 
+            CanJump = false;
+            if (Input.GetKey(KeyCode.Space) )
+            {
+                Climbing();
+                
+            }
+        }
+    }
 
 
 }
