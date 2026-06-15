@@ -4,21 +4,22 @@ using UnityEngine;
 
 public class HeartITween : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public float minScale = 0.9f;
+    public float maxScale = 1.1f;
+    public float speed = 2f;
+
+    Vector3 _baseScale;
+
     void Start()
     {
-        
+        _baseScale = transform.localScale;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        iTween.PunchScale(gameObject, iTween.Hash("x", 0.6, "y", 0.6, "time", 1 ));
-
-        
-       
+        float t = (Mathf.Sin(Time.time * speed) + 1f) * 0.5f;
+        float factor = Mathf.Lerp(minScale, maxScale, t);
+        transform.localScale = _baseScale * factor;
     }
 
-    
-    
 }
