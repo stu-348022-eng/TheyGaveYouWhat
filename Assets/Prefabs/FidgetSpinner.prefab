@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7603869379936169844}
   - component: {fileID: -5268255925421341640}
   - component: {fileID: 1455859926479971835}
+  - component: {fileID: 8231813315196840609}
   m_Layer: 0
   m_Name: FidgetSpinner
   m_TagString: Untagged
@@ -148,3 +149,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &8231813315196840609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5922728232573007427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d57524f9a6843d48aa310e7850a69a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
