@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private bool grounded;
     public bool FacingLeft;
     public bool CanJump;
-
+    
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
@@ -47,6 +48,8 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    
+
     private void Jump()
     {
         body.velocity = new Vector2(body.velocity.x, speed);
@@ -65,6 +68,11 @@ public class PlayerMovement : MonoBehaviour
             grounded = true;
             CanJump = true;
         }
+
+        if (collision.gameObject.tag == "death")
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -80,6 +88,8 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+
+
 
 
 }

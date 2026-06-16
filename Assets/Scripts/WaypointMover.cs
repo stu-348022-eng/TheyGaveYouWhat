@@ -9,13 +9,16 @@ public class WaypointMover : MonoBehaviour
     public float waittime;
     public bool loopwaypoints = true;
     private Transform[] waypoints;
-    private int currentwaypointsindex;
+    public int currentwaypointsindex;
     public bool iswaiting;
     public bool moving = false;
+    public bool isinRange;
 
     public LayerMask obstacleLayer;
 
     private float baseScaleX;
+    public Collider2D RangeTrigger;
+    
 
     void Start()
     {
@@ -30,7 +33,13 @@ public class WaypointMover : MonoBehaviour
 
     void Update()
     {
-        if (iswaiting)
+        if(isinRange == true && currentwaypointsindex == 0)
+        {
+            //isinRange = false;
+        }
+       
+
+        if (iswaiting || !isinRange)
         {
             return;
         }
@@ -76,5 +85,20 @@ public class WaypointMover : MonoBehaviour
         yield return new WaitForSeconds(waittime);
         currentwaypointsindex = loopwaypoints ? (currentwaypointsindex + 1) % waypoints.Length : Mathf.Min(currentwaypointsindex + 1, waypoints.Length - 1);
         iswaiting = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D RangeTrigger)
+    {
+        isinRange = true;
+    }
+
+    private void OnTriggerExit2D(Collider2D RangeTrigger)
+    {
+        if(currentwaypointsindex == 1)
+        {
+            isinRange = false;
+        }
+            
+         
     }
 }

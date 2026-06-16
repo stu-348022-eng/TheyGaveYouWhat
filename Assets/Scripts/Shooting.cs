@@ -8,7 +8,7 @@ public class Shooting : MonoBehaviour
     public GameObject bulletPrefab;
     public float bulletForce;
     public PlayerMovement playermovescrpt;
-
+    public GameObject player;
 
 
 
@@ -31,13 +31,16 @@ public class Shooting : MonoBehaviour
     {
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        
         if (playermovescrpt.FacingLeft)
         {
             rb.AddForce(-firePoint.right * bulletForce, ForceMode2D.Impulse);
+            iTween.PunchScale(player, new Vector2(-1.1f, 1.1f), 0.1f);
         }
         else if(!playermovescrpt.FacingLeft)
         {
             rb.AddForce(firePoint.right * bulletForce, ForceMode2D.Impulse);
+            iTween.PunchScale(player, new Vector2(1.1f, 1.1f), 0.1f);
         }
         
 
