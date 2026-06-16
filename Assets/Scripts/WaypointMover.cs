@@ -33,9 +33,10 @@ public class WaypointMover : MonoBehaviour
 
     void Update()
     {
-        if(isinRange == true && currentwaypointsindex == 0)
+        if(isinRange == true && currentwaypointsindex == 1)
         {
-            //isinRange = false;
+            
+            isinRange = false;
         }
        
 
@@ -87,18 +88,7 @@ public class WaypointMover : MonoBehaviour
         iswaiting = false;
     }
 
-    private void OnTriggerEnter2D(Collider2D RangeTrigger)
-    {
-        isinRange = true;
-    }
+    
 
-    private void OnTriggerExit2D(Collider2D RangeTrigger)
-    {
-        if(currentwaypointsindex == 1)
-        {
-            isinRange = false;
-        }
-            
-         
-    }
+    
 }
